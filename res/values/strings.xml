@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Android</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+    <string name="appointment">Umów się</string>
+    <string name="register">Zarejestruj się</string>
+    <string name="login">Zaloguj się</string>
+    <string name="password_hint">Hasło</string>
+    <string name="login_header">Logowanie</string>
+    <string name="name">Pesel</string>
+    <string name="log_in">Zaloguj</string>
+    <string name="log_out">Wyloguj</string>
+    <string name="doctor">Doctor</string>
+    <string name="patient">Patient</string>
+    <string name="receptionist">Receptionist</string>
+    <string name="admin">Admin</string>
+    <string name="appoint">Appoint</string>
+    <string name="registerr">Register</string>
+    <string name="all_patients">Wszyscy pacjenci</string>
+    <string name="visit">Wizyty</string>
+    <string name="completed_visit">Odbyte wizyty</string>
+    <string name="scheduled_visit">Zaplanowane wizyty</string>
+    <string name="detail_patient">Szczegółowe informacje</string>
+    <string name="all_doctors">Wszyscy lekarze</string>
+    <string name="specializaton">Specializacja</string>
+    <string name="doc">Lekarz</string>
+    <string name="appoint_this">Umów się</string>
+    <string name="scroll">Do góry</string>
+    <string name="cannot_login">Cannot login</string>
+    <string name="id">id</string>
+    <string name="list">list</string>
+    <string name="detail">detail</string>
+    <string name="recipe_det">recipe</string>
+    <string name="regis">Zarejestruj</string>
+    <string name="nameform">Imie</string>
+    <string name="surnameform">Nazwisko</string>
+    <string name="idform">Pesel</string>
+    <string name="passwordform">Password</string>
+    <string name="emailform">Email</string>
+    <string name="phoneform">Nr telefonu</string>
+    <string name="homenrform">Nr domu</string>
+    <string name="streetform">Ulica</string>
+    <string name="provinceform">Województwo</string>
+    <string name="cityform">Miasto</string>
+    <string name="showvisit">Pokaż wizyty</string>
+    <string name="showvisitform">Pokaż wizyty z dnia</string>
+    <string name="specform">Specializacja</string>
+    <string name="adddocform">Dodaj Lekarza</string>
+    <string name="show_menu4">Pokaż Menu</string>
+    <string name="contact">Kontakt</string>
+    <string name="todo">TODO</string>
+    <string name="one">1</string>
+
+</resources>
