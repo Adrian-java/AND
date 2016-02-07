@@ -10,28 +10,29 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.widget.Button;
+import android.widget.ImageButton;
 
 import com.eclinic.android.R;
-import com.pizza.android.domain.Contact;
-import com.pizza.android.domain.PizzaDetail;
+import com.pizza.android.model.Contact;
+import com.pizza.android.model.PizzaDetail;
 import com.pizza.android.rest.client.ContactRestClient;
 import com.pizza.android.rest.client.ContactRestClient.OnContactDownloadedListener;
 import com.pizza.android.rest.client.PizzaRestClient;
 import com.pizza.android.rest.client.PizzaRestClient.OnPizzaDownloadedListener;
+import com.pizza.android.shop.MenuModel;
 
 public class MainActivity extends Activity {
 
-	private Button menuButton;
-	private Button contactButton;
+	private ImageButton menuButton;
+	private ImageButton contactButton;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 		setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
-		menuButton = (Button) findViewById(R.id.menuButton);
-		contactButton = (Button) findViewById(R.id.contactButton);
+		menuButton = (ImageButton) findViewById(R.id.menuButton);
+		contactButton = (ImageButton) findViewById(R.id.contactButton);
 
 		goToMenuActivityListener();
 		goToContactActivityListener();
@@ -57,10 +58,11 @@ public class MainActivity extends Activity {
 					sp.fetchPizza(new OnPizzaDownloadedListener() {
 
 						@Override
-						public void onVisitViewsDownloaded() {
+						public void onPizzasDownloaded() {
 							Intent intent = new Intent(MainActivity.this, ListActivity.class);
 							intent.putExtra(getString(R.string.list),
 									new ArrayList<PizzaDetail>(sp.getAllPizzas()));
+							MenuModel.setList(sp.getAllPizzas());
 							goToPanel(intent, ListActivity.class);
 						}
 					});
@@ -85,7 +87,7 @@ public class MainActivity extends Activity {
 							ArrayList<Contact> a = new ArrayList<Contact>();
 							a.add(sp.getContact());
 							intent.putExtra(getString(R.string.list), a);
-							goToPanel(intent, Contact.class);
+							goToPanel(intent, ContactActivity.class);
 						}
 					});
 				} catch (Exception e) {
@@ -104,8 +106,7 @@ public class MainActivity extends Activity {
 
 			@Override
 			public void onClick(View v) {
-				Intent intent = new Intent(MainActivity.this, ContactActivity.class);
-				startActivity(intent);
+				getContact();
 			}
 		});
 	}
@@ -118,10 +119,6 @@ public class MainActivity extends Activity {
 
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
-		int id = item.getItemId();
-		if (id == R.id.action_settings) {
-			return true;
-		}
-		return super.onOptionsItemSelected(item);
+		return false;
 	}
 }

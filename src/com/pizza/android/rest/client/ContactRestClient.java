@@ -5,7 +5,7 @@ import java.io.IOException;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-import com.pizza.android.domain.Contact;
+import com.pizza.android.model.Contact;
 import com.pizza.android.rest.HttpMethod;
 import com.pizza.android.rest.NetworkRequest;
 import com.pizza.android.rest.RestConfig;
@@ -29,18 +29,14 @@ public class ContactRestClient {
 	}
 
 	private void setVisitViews(String s) throws Exception {
-		JSONArray pizzaArray = null;
-		pizzaArray = new JSONArray(s);
-
-		for (int i = 0; i < pizzaArray.length(); ++i) {
-			JSONObject contactObject = pizzaArray.getJSONObject(i);
-			Contact contact = new Contact();
-			contact.setName(contactObject.getString("name"));
-			contact.setCity(contactObject.getString("city"));
-			contact.setPhone(contactObject.getString("phone"));
-			contact.setStreet(contactObject.getString("street"));
-			contact.setHours(contactObject.getString("hours"));
-		}
+		JSONObject contactObject = new JSONObject(s);
+		contact = new Contact();
+		contact.setName(contactObject.getString("name"));
+		JSONObject addressObject = contactObject.getJSONObject("address");
+		contact.setCity(addressObject.getString("city"));
+		contact.setStreet(addressObject.getString("street"));
+		contact.setPhone(contactObject.getString("phone"));
+		contact.setHours(contactObject.getString("hours"));
 
 	}
 

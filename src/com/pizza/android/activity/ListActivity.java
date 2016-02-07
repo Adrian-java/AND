@@ -16,49 +16,69 @@ import android.widget.ListView;
 
 import com.eclinic.android.R;
 import com.pizza.android.adapter.MenuListAdapter;
-import com.pizza.android.domain.PizzaDetail;
+import com.pizza.android.model.PizzaDetail;
+import com.pizza.android.shop.Basket;
+import com.pizza.android.shop.MenuModel;
 
 public class ListActivity extends Activity {
 
 	private ListView listView;
 	private MenuListAdapter adapter;
-	private String prevActivity;
+	private boolean basketMode;
 
 	@Override
 	@SuppressWarnings("unchecked")
 	protected void onCreate(Bundle savedInstanceState) {
-		prevActivity = "";
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.list_grid);
 		setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 		ArrayList<PizzaDetail> list = (ArrayList<PizzaDetail>) getIntent().getExtras()
 				.getSerializable(getString(R.string.list));
 		try {
-			prevActivity = getIntent().getExtras().getString("activity");
+			basketMode = getIntent().getExtras().getBoolean("basketMode");
 		} catch (Exception e) {
-			prevActivity = "";
+			basketMode = false;
 		}
 		updateAdapter(list);
 		initializeGrid();
 	}
 
 	private void updateAdapter(Collection<PizzaDetail> list) {
-		adapter = new MenuListAdapter(this, list,prevActivity);
+		adapter = new MenuListAdapter(this, list, basketMode);
 	}
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
-		getMenuInflater().inflate(R.menu.main, menu);
+		getMenuInflater().inflate(R.menu.details_menu, menu);
 		return true;
 	}
 
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
-		int id = item.getItemId();
-		if (id == R.id.action_settings) {
-			return true;
+		if (basketMode) {
+			switch (item.getItemId()) {
+			case R.id.order: {
+				goToPanel(new ArrayList<PizzaDetail>(Basket.getInstance().getList()), basketMode);
+				return true;
+			}
+			case R.id.deleteAll: {
+				Basket.getInstance().clearList();
+				goToPanel(new ArrayList<PizzaDetail>(MenuModel.getList()), false);
+				return true;
+			}
+			default: {
+				return super.onOptionsItemSelected(item);
+			}
+			}
 		}
-		return super.onOptionsItemSelected(item);
+		return false;
+	}
+
+	private void goToPanel(ArrayList<PizzaDetail> listAdapter, boolean basketMode) {
+		Intent intent = null;
+		intent = new Intent(ListActivity.this, OrderActivity.class);
+		intent.putExtra(getString(R.string.list), listAdapter);
+		startActivity(intent);
 	}
 
 	private void initializeGrid() {
@@ -77,6 +97,7 @@ public class ListActivity extends Activity {
 	private void showDetail(PizzaDetail model) {
 		Intent i = new Intent(this, ListDetailsActivity.class);
 		i.putExtra(getString(R.string.detail), model);
+		i.putExtra("basketMode", basketMode);
 		startActivity(i);
 	}
 }

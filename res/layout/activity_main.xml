@@ -10,21 +10,23 @@
     android:screenOrientation="portrait"
     tools:context="com.pizza.android.activity.MainActivity" >
 
-    <Button
+    <ImageButton
         android:id="@+id/menuButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="14dp"
         android:background="#67AACC"
+        android:src="@drawable/menu_image"
         android:text="@string/show_menu4" />
 
-    <Button
+    <ImageButton
         android:id="@+id/contactButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/menuButton"
         android:layout_marginTop="31dp"
         android:background="#67AACC"
+        android:src="@drawable/contact"
         android:text="@string/contact" />
 
 </RelativeLayout>

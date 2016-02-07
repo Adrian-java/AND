@@ -52,5 +52,12 @@
     <string name="contact">Kontakt</string>
     <string name="todo">TODO</string>
     <string name="one">1</string>
+    <string name="notEmptyField">Pola nie moga byc puste</string>
+    <string name="summ">Podsumowanie\n</string>
+    <string name="personal_data">Dane osobowe:\n</string>
+    <string name="_tel_">" tel: "</string>
+    <string name="add_info">Dodatkowe informacje\n</string>
+    <string name="to_pay">"Do zaplaty: "</string>
+    <string name="new_line">\n</string>
 
 </resources>

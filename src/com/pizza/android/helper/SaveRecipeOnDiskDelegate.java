@@ -9,7 +9,7 @@ import android.os.Environment;
 import android.util.Log;
 import android.widget.Toast;
 
-import com.pizza.android.domain.PizzaDetail;
+import com.pizza.android.model.PizzaDetail;
 
 public class SaveRecipeOnDiskDelegate {
 

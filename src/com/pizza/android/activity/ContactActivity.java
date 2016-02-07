@@ -10,7 +10,7 @@ import android.view.MenuItem;
 import android.widget.TextView;
 
 import com.eclinic.android.R;
-import com.pizza.android.domain.Contact;
+import com.pizza.android.model.Contact;
 
 public class ContactActivity extends Activity {
 

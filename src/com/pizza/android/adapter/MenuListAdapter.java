@@ -13,24 +13,25 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.eclinic.android.R;
-import com.pizza.android.domain.PizzaDetail;
+import com.pizza.android.helper.MenuImageHelper;
+import com.pizza.android.model.PizzaDetail;
 
 public class MenuListAdapter extends BaseAdapter {
 
 	private List<PizzaDetail> list = new ArrayList<>();
 	private Context context;
-	private String prevActivity;
+	private boolean basketMode;
 
-	public MenuListAdapter(Context context, Collection<PizzaDetail> list, String prevActivity) {
+	public MenuListAdapter(Context context, Collection<PizzaDetail> list, boolean basketMode) {
 		this.context = context;
 		this.list.clear();
 		this.list.addAll(list);
-		this.prevActivity = prevActivity;
+		this.basketMode = basketMode;
 	}
 
-	public void setRecipes(Collection<PizzaDetail> recipes) {
+	public void setPizzaDetails(Collection<PizzaDetail> pd) {
 		list.clear();
-		list.addAll(recipes);
+		list.addAll(pd);
 	}
 
 	@Override
@@ -50,28 +51,27 @@ public class MenuListAdapter extends BaseAdapter {
 
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {
-		View recipeView;
+		View view;
 
 		if (convertView == null) {
-			recipeView = LayoutInflater.from(context).inflate(R.layout.main_row, parent, false);
+			view = LayoutInflater.from(context).inflate(R.layout.main_row, parent, false);
 		} else {
-			recipeView = convertView;
+			view = convertView;
 		}
 
 		PizzaDetail adapterView = getItem(position);
 
-		bindToView(adapterView, recipeView, position);
+		bindToView(adapterView, view, position);
 
-		return recipeView;
+		return view;
 	}
 
 	private void bindToView(PizzaDetail i, View view, int position) {
 		ImageView pizzaImage = (ImageView) view.findViewById(R.id.pizza_image);
-//		pizzaImage.set//set image 
+		MenuImageHelper.setPizzaImage(i, pizzaImage);
 		TextView pizzaName = (TextView) view.findViewById(R.id.pizza_name);
 		pizzaName.setText(i.getName());
 		TextView pizzaPrice = (TextView) view.findViewById(R.id.pizza_price);
 		pizzaPrice.setText(String.valueOf(i.getPrice()));
 	}
-
 }

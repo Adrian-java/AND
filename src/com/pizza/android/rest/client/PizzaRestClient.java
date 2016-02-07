@@ -8,7 +8,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import com.pizza.android.domain.PizzaDetail;
+import com.pizza.android.model.PizzaDetail;
 import com.pizza.android.rest.HttpMethod;
 import com.pizza.android.rest.NetworkRequest;
 import com.pizza.android.rest.RestConfig;
@@ -18,7 +18,7 @@ public class PizzaRestClient {
 	private final List<PizzaDetail> pizzas = new ArrayList<>();
 
 	public interface OnPizzaDownloadedListener {
-		void onVisitViewsDownloaded();
+		void onPizzasDownloaded();
 	}
 
 	public void fetchPizza(OnPizzaDownloadedListener listener)
@@ -26,8 +26,8 @@ public class PizzaRestClient {
 		String pizzaMenu = RestConfig.MENU_GET;
 		String json = getPizzaFromServer(pizzaMenu);
 		pizzas.clear();
-		setVisitViews(json);
-		listener.onVisitViewsDownloaded();
+		setPizza(json);
+		listener.onPizzasDownloaded();
 	}
 
 	public int getPizzaNumber() {
@@ -38,7 +38,7 @@ public class PizzaRestClient {
 		return pizzas;
 	}
 
-	private void setVisitViews(String s) throws Exception {
+	private void setPizza(String s) throws Exception {
 		JSONArray pizzaArray = null;
 		try {
 			pizzaArray = new JSONArray(s);
@@ -48,7 +48,6 @@ public class PizzaRestClient {
 				PizzaDetail pizza = new PizzaDetail();
 				pizza.setName(VisitViewsObject.getString("name"));
 				pizza.setIngredients(VisitViewsObject.getString("ingredients"));
-//				pizza.setImageLink(VisitViewsObject.getString("imageLink"));
 				pizza.setPrice(VisitViewsObject.getDouble("price"));
 				pizza.setId(VisitViewsObject.getInt("id"));
 				pizzas.add(pizza);

@@ -3,7 +3,7 @@ package com.pizza.android.shop;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.pizza.android.domain.PizzaDetail;
+import com.pizza.android.model.PizzaDetail;
 
 public class Basket {
 

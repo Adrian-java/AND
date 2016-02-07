@@ -57,34 +57,7 @@ public class NetworkRequest {
 		}
 	}
 
-	public String login(Map<String, String> data) throws IOException {
-		URL siteUrl = new URL(url);
-		HttpURLConnection conn = (HttpURLConnection) siteUrl.openConnection();
-		conn.setRequestMethod(method.getMethod());
-		conn.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
-		conn.setReadTimeout(10000 /* milliseconds */);
-		conn.setConnectTimeout(150000 /* milliseconds */);
-		conn.setUseCaches(true);
-		conn.setDoOutput(true);
-		conn.setDoInput(true);
-
-		DataOutputStream out = new DataOutputStream(conn.getOutputStream());
-
-		Set keys = data.keySet();
-		Iterator keyIter = keys.iterator();
-		String content = "";
-		for (int i = 0; keyIter.hasNext(); i++) {
-			Object key = keyIter.next();
-			if (i != 0) {
-				content += "&";
-			}
-			content += key + "=" + URLEncoder.encode(data.get(key), "UTF-8");
-		}
-		out.writeBytes(content);
-		out.flush();
-		out.close();
-		return readStream(conn.getInputStream());
-	}
+	
 
 	public String readStream(InputStream stream) throws IOException {
 		BufferedReader r = new BufferedReader(new InputStreamReader(stream));
