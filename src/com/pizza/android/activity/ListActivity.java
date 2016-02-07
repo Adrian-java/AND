@@ -35,7 +35,7 @@ public class ListActivity extends Activity {
 		ArrayList<PizzaDetail> list = (ArrayList<PizzaDetail>) getIntent().getExtras()
 				.getSerializable(getString(R.string.list));
 		try {
-			basketMode = getIntent().getExtras().getBoolean("basketMode");
+			basketMode = getIntent().getExtras().getBoolean(getString(R.string.basketmode));
 		} catch (Exception e) {
 			basketMode = false;
 		}
@@ -97,7 +97,7 @@ public class ListActivity extends Activity {
 	private void showDetail(PizzaDetail model) {
 		Intent i = new Intent(this, ListDetailsActivity.class);
 		i.putExtra(getString(R.string.detail), model);
-		i.putExtra("basketMode", basketMode);
+		i.putExtra(getString(R.string.basketmode), basketMode);
 		startActivity(i);
 	}
 }

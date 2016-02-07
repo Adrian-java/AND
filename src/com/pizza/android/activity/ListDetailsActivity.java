@@ -45,7 +45,7 @@ public class ListDetailsActivity extends Activity {
 		Intent i = getIntent();
 		pizzaDetail = (PizzaDetail) i.getExtras().getSerializable(getString(R.string.detail));
 		initField();
-		basketMode = i.getExtras().getBoolean("basketMode");
+		basketMode = i.getExtras().getBoolean(getString(R.string.basketmode));
 		if (!basketMode) {
 			addOrRemoveToBasketButton.setImageResource(R.drawable.basket);
 		} else {
@@ -63,7 +63,7 @@ public class ListDetailsActivity extends Activity {
 		name = (TextView) findViewById(R.id.name);
 		quantityEditText = (EditText) findViewById(R.id.quantity);
 		if (quantityEditText.getText().toString().isEmpty()) {
-			quantityEditText.setText("1");
+			quantityEditText.setText(R.string._1);
 		}
 		addOrRemoveToBasketButton = (ImageView) findViewById(R.id.addToBasket);
 		goToBasketButton = (ImageView) findViewById(R.id.goToBasket);
@@ -101,12 +101,12 @@ public class ListDetailsActivity extends Activity {
 				if (!basketMode) {
 					pizzaDetail.setQuantity(Integer.valueOf(quantityEditText.getText().toString()));
 					Basket.getInstance().getList().add(pizzaDetail);
-					Alert.createToast(ctx, "Added to basket");
+					Alert.createToast(ctx, getString(R.string.added_to_basket));
 				} else {
 					PizzaDetail deletePizza = foundDeletedObject();
 					if (deletePizza != null) {
 						Basket.getInstance().getList().remove(deletePizza);
-						Alert.createToast(ctx, "Deleted from basket");
+						Alert.createToast(ctx, getString(R.string.deleted_from_basket));
 						goToPanel(new ArrayList<PizzaDetail>(MenuModel.getList()), false);
 					}
 				}
@@ -119,7 +119,7 @@ public class ListDetailsActivity extends Activity {
 		Intent intent = null;
 		intent = new Intent(ListDetailsActivity.this, ListActivity.class);
 		intent.putExtra(getString(R.string.list), listAdapter);
-		intent.putExtra("basketMode", basketMode);
+		intent.putExtra(getString(R.string.basketmode), basketMode);
 		startActivity(intent);
 	}
 

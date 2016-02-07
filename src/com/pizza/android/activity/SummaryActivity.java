@@ -19,10 +19,10 @@ public class SummaryActivity extends Activity {
 		setContentView(R.layout.activity_summary);
 		setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 		initField();
-		String name = getIntent().getExtras().getString("name");
-		String phone = getIntent().getExtras().getString("phone");
-		String info = getIntent().getExtras().getString("info");
-		String summary = getIntent().getExtras().getString("summary");
+		String name = getIntent().getExtras().getString(getString(R.string.name));
+		String phone = getIntent().getExtras().getString(getString(R.string.phone));
+		String info = getIntent().getExtras().getString(getString(R.string.info));
+		String summary = getIntent().getExtras().getString(getString(R.string.summary));
 
 		setSummaryText(name,phone,info,summary);
 

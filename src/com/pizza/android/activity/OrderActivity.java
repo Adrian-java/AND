@@ -54,10 +54,10 @@ public class OrderActivity extends Activity {
 					return;
 				}
 				Intent intent = new Intent(OrderActivity.this, SummaryActivity.class);
-				intent.putExtra("name", na);
-				intent.putExtra("phone", ph);
-				intent.putExtra("info", info.getText().toString());
-				intent.putExtra("summary", summary.getText().toString());
+				intent.putExtra(getString(R.string.name_), na);
+				intent.putExtra(getString(R.string.phone_), ph);
+				intent.putExtra(getString(R.string.info_), info.getText().toString());
+				intent.putExtra(getString(R.string.summary_), summary.getText().toString());
 				startActivity(intent);
 			}
 		});
@@ -69,7 +69,7 @@ public class OrderActivity extends Activity {
 		for (PizzaDetail p : list) {
 			price += p.getPrice();
 		}
-		summary.setText(String.valueOf(price) + " PLN");
+		summary.setText(String.valueOf(price) + R.string._pln);
 	}
 
 	private void initField() {
